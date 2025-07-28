@@ -28,3 +28,16 @@ Up and running with Polars
   - Detecting when operations can be run in parallel
 - `.explain()` shows optimized query plan
   - `print(... .explain())` is easier to read.
+
+Data types
+- Polars data types in a `Series` or `DataFrame` come from the **Apache Arrow** project
+  - The data types in Pandas come from a mix of Numpy, Python, Apache Arrow, and some custom extension types
+- **Apache Arrow** is an open source cross-language project to figure out the best way to represent tabular data in memory
+  - Apache Arrow is a specification for how data should be represented in memory
+  - Apache Arrow is a set of libraries in different languages that implement that specification
+  - Polars use the implementation of the Arrow specification from the **Rust library Arrow2**.
+
+
+
+
+
