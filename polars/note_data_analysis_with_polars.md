@@ -36,8 +36,24 @@ Data types
   - Apache Arrow is a specification for how data should be represented in memory
   - Apache Arrow is a set of libraries in different languages that implement that specification
   - Polars use the implementation of the Arrow specification from the **Rust library Arrow2**.
+- Why does Polars use Apache Arrow?
+  - Arrow allows for sharing data without copying (**zero-copy**)
+  - Faster vectorized calculations
+  - Consistent representation of missing data
+- With these, Polars can load and process data more quickly and with less memory usage
 
+- `df.select("col")` turns it to one column dataframe.
+- `to_series()` and `to_frame()` allows for shifting back and forth.
 
+Convert between Polars and Numpy, convert between Polars and Pandas
+- Choose the 64-bit floating point columns only for conversion to Numpy
+```
+df
+.select(
+    pl.col(pl.Float64)
+)
+.to_numpy()
+```
 
 
 
