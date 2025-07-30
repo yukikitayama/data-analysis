@@ -54,6 +54,18 @@ df
 )
 .to_numpy()
 ```
+- Polar is generally faster than Numpy. If you need to feed numpy object to machine learning models, do data processing with Polar most of the time, and right before feeding to ML model, convert Polar dataframes to Numpy.
+- In some casses, we can convert Series to Numpy without copying (**zero-copy**).
+  - Zero-copy is only possible if there's no `Null` or `NaN` values, and pd.Series
+  - Let an object refrece back to the data, without copying it.
+  - Data wont't copied, itr wil refecemcer 
+- With zero-copy conversion, the Numpy array is read-only and you cannot overridel
+- `.to_pandas()` converts to **Numpy-baked** Pandas dataframe.
+- Conversion of Pandas required you PyArrow
+- Convert to PyArrow-backed Pandas dataframe
+  - Use pandas without copying 
+  - If there is a function you want from Pandas, apply the function and revert back to Polars. Only works in eager mode.
+- Should not call `pd.DataFrame(pl_df)`, because may have bugs.
 
-
-
+Visualization
+- The built-in visualization library of Polars is **Altair**.
