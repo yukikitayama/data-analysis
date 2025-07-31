@@ -29,6 +29,10 @@ Up and running with Polars
 - `.explain()` shows optimized query plan
   - `print(... .explain())` is easier to read.
 
+Query optimization
+- Polars passes the naive query plan to its query optimizer, and runs the optimized query plan when `.collect()` method is called on df.
+- When the `.fetch()` method is called on a LazyFrame `df`, polars run the optimized query plan and fetches a limited number of rows from the data source.
+
 Data types
 - Polars data types in a `Series` or `DataFrame` come from the **Apache Arrow** project
   - The data types in Pandas come from a mix of Numpy, Python, Apache Arrow, and some custom extension types
@@ -69,3 +73,8 @@ df
 
 Visualization
 - The built-in visualization library of Polars is **Altair**.
+- You should limit the number of columns in the data passed to the visualization libraries, so that plots use less memory.
+
+Filter rows
+- Polars doesn't have an explicit index, but it has an implicit integer row number index.
+- We cannot pass a list of Boolean values in `[]`, while Pandas can.
