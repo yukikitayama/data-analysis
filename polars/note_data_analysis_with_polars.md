@@ -77,4 +77,14 @@ Visualization
 
 Filter rows
 - Polars doesn't have an explicit index, but it has an implicit integer row number index.
-- We cannot pass a list of Boolean values in `[]`, while Pandas can.
+- We cannot pass a list of Boolean values or a Boolean Series in `[]`, while Pandas can.
+- Main use of `[]` to select rows is when inspecting data in interactive mode.
+- **`filter` is the primary way to filter rows in Polars**.
+- Boolean series can be passed to `filter()`
+- `with_columns()` and `filter()` creates a condition column and filter rows based on that
+```python
+(
+    df
+    .with_columns
+)
+```
