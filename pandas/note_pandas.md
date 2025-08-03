@@ -8,4 +8,9 @@ Input and output
 Visualization
 - `plt.style.available` returns a list of color themes.
 - `plt.style.use("theme")` sets a global setting
-- 
+
+Settings and options
+- `pd.describe_option("display")` shows all the explanations for each option, default and current value.
+- `pd.set_option("display.max_columns", 2)` and `pd.options.display.max_columns = 2` are the same.
+- `pd.reset_option("display.max_rows")` resets to the default setting.
+- For floating decimal points, `pd.options.display.precision = 2`.
