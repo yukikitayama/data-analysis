@@ -85,6 +85,17 @@ Filter rows
 ```python
 (
     df
-    .with_columns
+    .with_columns(
+        less_than_30_boolean = pl.col("Age") < 30
+    )
+    .filter(
+        pl.col("less_than_30_boolean")
+    )
 )
 ```
+- `~` is negation
+- `partition_by("col", as_dict=True)` can avoid expensive large dataframe
+  - returns a dictionary where a key is a value of the column and a value is subset dataframe
+- In query plan output, `SELECTION: None` when no filters have been applied.
+- Optimized query plan run when LazyFrame is evaluated with `collect` or `fetch`
+
