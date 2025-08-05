@@ -98,4 +98,14 @@ Filter rows
   - returns a dictionary where a key is a value of the column and a value is subset dataframe
 - In query plan output, `SELECTION: None` when no filters have been applied.
 - Optimized query plan run when LazyFrame is evaluated with `collect` or `fetch`
+- Polars will apply the filter on some column as the CSV is being read.
+- In the optimized plan, only the selected rows of CSV that meet the filter conditions are read into a DataFrame. This is memory efficient.
+- In lazy mode, if we pass multiple `filter` calls, the query optimizer combines these into a single condition inside `SELECTION`.
 
+Selecting columns
+- `[]` rules
+  - If we pass numeric value, we get rows
+  - If we pass string, we get columns
+  - If we pass a tuple like `[numeric, string]`, we get rows and columns
+- Cannot create a new column by `df["new_col"] = 1`
+- To create a column, we need to use `with_columns` method.z
