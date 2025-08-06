@@ -108,4 +108,22 @@ Selecting columns
   - If we pass string, we get columns
   - If we pass a tuple like `[numeric, string]`, we get rows and columns
 - Cannot create a new column by `df["new_col"] = 1`
-- To create a column, we need to use `with_columns` method.z
+- To create a column, we need to use `with_columns` method.
+- The output of `select()` is always `DataFrame` rather than `Series` even if one column is selected.
+  - Use `to_series()`
+- `select(["col1", "col2"])` to select multiple columns
+- **`select` can be used in lazy mode, but `[]` indenxing can be used in eager mode only**.
+- **Expression in `select` can be optimized in lazy mode by the query optimizer**.
+- **Multiple expressions in `select` can be run in parallel**.
+- For these reasons, use `select` rather than `[]` indexing in general.
+- Using `select` with `scan_csv()` in lazy mode, Polars only loads necessary columns into memory when reading the CSV and changes the `PROJECT` part of the optimized query plan.
+- Reducing the number of columns reduces time and memory usage.
+- Polars has 2 ways for selecting multiple colums
+  - Expression API with `pl.col` and `pl.all`
+  - Selectors API with polars selectors `polars.selectors`
+    - For less verbose and consistency
+- `select(pl.exclude([]))` is shorthand for `select(pl.all().exclude([]))`
+- We can select columns with regex if the regex starts with `^` and ends with `$`
+  - `select("^something$")` or `select(pl.col("^something$))`
+- `select(pl.col(pl.Utf8))` selects columns by dtypes, here string
+- `pl.NUMERIC_DTYPES` to select all numeric dtypes
