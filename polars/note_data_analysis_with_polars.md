@@ -127,3 +127,16 @@ Selecting columns
   - `select("^something$")` or `select(pl.col("^something$))`
 - `select(pl.col(pl.Utf8))` selects columns by dtypes, here string
 - `pl.NUMERIC_DTYPES` to select all numeric dtypes
+- `.select(cs.numeric())` can select columns of all integers and floating points
+- `cs.by_name("col1", "col2", ...)` can select columns by name
+- Simpler alternatives to regex
+  - `contains`
+  - `starts_with`
+  - `end_with`
+  - `matches` doesn't need `^` and `$` that we need for the expression API
+- `cs.string() - cs.starts_with("T")` select all string columns other than any columns beginning with T
+- `with_columns` allows us to transform the existing column
+- `with_columns` and `alias` can add a new column
+- **Polars doesn't support add a new column using `[]` indexing**.
+- `with_columns` returns all of the columns, but `select` returns a subset of the columns.
+- `plt.lit` (literal function) and `alias` can add a new column with a constant value
