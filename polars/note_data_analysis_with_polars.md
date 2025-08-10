@@ -160,6 +160,42 @@ pl.when(boolean expression)
 - Polars can use a **fast track algorithm** if it knows the data in a column is **sorted**.
   - If we want the max value on a sorted column, we just take the last non-null value
 - If we transform a column with a sorting operation, Polars will update `flags`
+- `df.rename({"current_name": "new_name"})`
+- `df.drop(["col1", "col2"])`
+- `df.select([new list of columns])` reorders columns
+- Use `pipe` method to transform dataframe by function
+```
+def uppercase_all_strings(df):
+    return (
+        df
+        .with_columns(
+            pl.col(pl.Utf8).str.to_uppercase()
+        )
+    )
+
+(
+    df
+    .pipe(uppercase_all_strings)
+)
+```
+- The transformations in `pipe` are passed to the query optimizer in lazy mode.
+- To use function arguments in `pipe`, a `DataFrame` needs to be the first argument, the rest of the arguments follows it, only a `DataFrame` is output
+```
+def _multiply_floats(df, multiplication_factor):
+    return df.select(
+        pl.col(pl.Float64)
+    ) * multiplication_factor
+
+
+(
+    df
+    .pipe(
+        _multiply_floats,
+        multiplication_factor=3
+    )
+    .head(3)
+)
+```
 
 
 Settings
