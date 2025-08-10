@@ -140,3 +140,27 @@ Selecting columns
 - **Polars doesn't support add a new column using `[]` indexing**.
 - `with_columns` returns all of the columns, but `select` returns a subset of the columns.
 - `plt.lit` (literal function) and `alias` can add a new column with a constant value
+- `pl.when` syntax
+```
+pl.when(Boolean expression)
+.then(value if true)
+.otherwise(value if false)
+.alias(new column name)
+```
+- For a condition on multiple other columns, `() & ()` in `pl.when`
+- A new column based on `if-elif-else` condition
+```
+pl.when(boolean expression)
+.then(value if true)
+.when(boolean expression)
+.then(value if true)
+.otherwise(value if false)
+.alias(new column name)
+```
+- Polars can use a **fast track algorithm** if it knows the data in a column is **sorted**.
+  - If we want the max value on a sorted column, we just take the last non-null value
+- If we transform a column with a sorting operation, Polars will update `flags`
+
+
+Settings
+- `pl.Config.set_tbl_rows(4)` will always print 4 rows
