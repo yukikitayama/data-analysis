@@ -136,6 +136,8 @@ Selecting columns
   - `matches` doesn't need `^` and `$` that we need for the expression API
 - `cs.string() - cs.starts_with("T")` select all string columns other than any columns beginning with T
 - `with_columns` allows us to transform the existing column
+- **The difference between `select` and `with_columns` is that `select` returns only the columns listed while `with_columns` returns the entire dataframe
+  - Both can transform columns using expressions.
 - `with_columns` and `alias` can add a new column
 - **Polars doesn't support add a new column using `[]` indexing**.
 - `with_columns` returns all of the columns, but `select` returns a subset of the columns.
@@ -196,6 +198,11 @@ def _multiply_floats(df, multiplication_factor):
     .head(3)
 )
 ```
+- `df.rows()` and `df.iter_rows()` can iterate rows
+  - When we call `rows`, the **entire** `DataFrame` is materialized as a list of tuple
+  - When we call `iter_rows`, Polars materializes each row as a Python tuple when we iterate over it rather than materializing the whole `DataFrame` at the outset.
+    - Can reduce memory usage
+- `df.rows(named=True)` and `df.iter_rows(named=True)` returns a list of dictionary, so that column name can access by key
 
 
 Settings
