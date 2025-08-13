@@ -210,6 +210,36 @@ Missing values
   - Polars keeps track of this always, so it's a cheap operation regardless of the size of columns
 - Use `filter()` and `is_not_null()` to filter null values.
 - Use `drop_nulls()` to remove missing values.
+- Replace all the missing values with 0
+```
+(
+    df
+    .with_columns(
+        pl.all().fill_null(0).name.suffix("_new")
+    )
+)
+```
+- Replace missing values with strategy
+```
+(
+    df
+    .with_columns(
+        pl.all().fill_null(strategy="forward").name.suffix("_new")
+    )
+)
+```
+- Replacing missing values by group needs **window function** `over()`.
+  - Group by operation
+```
+(
+    df
+    .with_columns(
+        pl.col("col1").fill_null(strategy="forward").over("group").name.suffix("_filled")
+    )
+)
+```
+
+
 
 Settings
 - `pl.Config.set_tbl_rows(4)` will always print 4 rows
