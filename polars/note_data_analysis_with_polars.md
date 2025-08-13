@@ -204,6 +204,12 @@ def _multiply_floats(df, multiplication_factor):
     - Can reduce memory usage
 - `df.rows(named=True)` and `df.iter_rows(named=True)` returns a list of dictionary, so that column name can access by key
 
+Missing values
+- Missing values in Polars are `null` for all data types.
+- `df.null_count()` stores metadata
+  - Polars keeps track of this always, so it's a cheap operation regardless of the size of columns
+- Use `filter()` and `is_not_null()` to filter null values.
+- Use `drop_nulls()` to remove missing values.
 
 Settings
 - `pl.Config.set_tbl_rows(4)` will always print 4 rows
