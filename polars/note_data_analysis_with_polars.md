@@ -238,7 +238,7 @@ Missing values
     )
 )
 ```
-
+- `pl.coalesce(["col1", "col2", ...])` can use a sequence of columns to fill missing values
 
 
 Settings
