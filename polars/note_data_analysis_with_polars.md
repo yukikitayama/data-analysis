@@ -240,6 +240,16 @@ Missing values
 ```
 - `pl.coalesce(["col1", "col2", ...])` can use a sequence of columns to fill missing values
 
-
 Settings
 - `pl.Config.set_tbl_rows(4)` will always print 4 rows
+
+Data types and precision
+- **Polars creates integer and float columns as 64-bit by default**.
+- `shrink_dtype` allows us to detect if the actual data in a column can fit in a lower precision dtype and cast the column to that dtype
+- **Working at a lower precision may be more effective for some analysis**.
+- `df.estimated_size(unit="b")` returns the estimated size in bytes
+- Casting 64-bit representation dataframe to 32-bit representation can halve memory usage
+- Math calculation will be faster with 32-bit data than 64-bit data.
+- **Moving to a lower precision than 32-bit does not always lead to faster performance**. 
+  - Many CPUs do not have native support for 8-bit and 16-bit operations and so they emulate it with 32-bit operations.
+
