@@ -253,3 +253,20 @@ Data types and precision
 - **Moving to a lower precision than 32-bit does not always lead to faster performance**. 
   - Many CPUs do not have native support for 8-bit and 16-bit operations and so they emulate it with 32-bit operations.
 
+Categorical
+- `cast(pl.Categorical)`
+- Polars creates a mapping by 32-bit unsigned integer, replaces the string column to integers
+- Working with integers needs less memory and runs faster than working with string
+- The underlying integer representation is called **physical representation**.
+- User `to_physical()` to categorical columns
+- Sorting categoricals happens by physical integers
+- Use `.cat.set_ordering("lexical")` to categorical columns to make sorting based on string order 
+- Categorical columns cannot perform operations like `max()`
+- `StringCache` stores mapping string to integer, different dataframe ans series can use
+- Use `StringCache` with `with` context-manager
+- `pl.enable_string_cache()` enables globally
+- `pl.using_string_cache()` returns a boolean
+- `pl.disable_string_cache()` disable
+- In production, you should use a context manager, because it's explicit and less likely to cause unexpected behavior
+
+**START WITH NESTED DTYPES UDEMY NOTEBOOK!!!**
