@@ -269,4 +269,11 @@ Categorical
 - `pl.disable_string_cache()` disable
 - In production, you should use a context manager, because it's explicit and less likely to cause unexpected behavior
 
-**START WITH NESTED DTYPES UDEMY NOTEBOOK!!!**
+Nested dtypes
+- Generally want to avoid working with a `pl.Obeject` dtype if possible
+- `pl.Struct` and `dicts`, `dict` on each row has the same key, same dtype
+  - Keys in a struct column are called `fields`
+- `df["struct_col"].struct.fields` lists keys on a `Series`
+- `pl.col("struct_col").struct.field("key_name")` access fields
+- `unnest()` can un-nest `pl.Struct`
+- We can do fast operations on a `pl.Struct` dtype because we are working with Polars objects rather than python `list`
