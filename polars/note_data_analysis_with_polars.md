@@ -242,6 +242,7 @@ Missing values
 
 Settings
 - `pl.Config.set_tbl_rows(4)` will always print 4 rows
+- `pl.Config.set_fmt_table_cell_list_len(20)` controls the number of elements printed.
 
 Data types and precision
 - **Polars creates integer and float columns as 64-bit by default**.
@@ -277,3 +278,6 @@ Nested dtypes
 - `pl.col("struct_col").struct.field("key_name")` access fields
 - `unnest()` can un-nest `pl.Struct`
 - We can do fast operations on a `pl.Struct` dtype because we are working with Polars objects rather than python `list`
+
+List dtypes
+- Length in a list dtype column doesn't have to be the same
