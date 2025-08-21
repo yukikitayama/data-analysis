@@ -281,3 +281,10 @@ Nested dtypes
 
 List dtypes
 - Length in a list dtype column doesn't have to be the same
+- `explode` explodes `pl.List` column into rows.
+- `group_by` and `agg` can recreate list dtype column from rows
+- `list.to_struct()` and `unnest()` allow data to break out to columns
+- In `pl.List` column, the data is stored horizontally, row by row.
+- In `pl.Struct` column, the data is stored vertically, in each nested column
+- Conversion between list and struct could be expensive
+- `to_numpy()` can create numpy array from polar data
