@@ -288,3 +288,9 @@ List dtypes
 - In `pl.Struct` column, the data is stored vertically, in each nested column
 - Conversion between list and struct could be expensive
 - `to_numpy()` can create numpy array from polar data
+- `list.slice()`, `list.get()`, `list.head()` to access elements in list
+- `list.reverse()`, `list.sort()`, `list.shift()` orders list
+- `list.len()`, `list.mean()`
+- calling expression on each list
+```
+```
