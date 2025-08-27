@@ -291,6 +291,7 @@ List dtypes
 - `list.slice()`, `list.get()`, `list.head()` to access elements in list
 - `list.reverse()`, `list.sort()`, `list.shift()` orders list
 - `list.len()`, `list.mean()`
-- calling expression on each list
-```
-```
+
+String column
+- `explode()` can expand the list column to have an entry for each row.
+- `pl.concat_str([], separator=)` can merge string columns
