@@ -295,3 +295,14 @@ List dtypes
 String column
 - `explode()` can expand the list column to have an entry for each row.
 - `pl.concat_str([], separator=)` can merge string columns
+
+Grouping and aggregation
+- `describe()` computes count of string column too, but it cast the described column to string.
+- `pl.col("col1").rolling_mean(window_size=X)` computes moving average
+  - `min_periods` argument allows for change window size
+  - `center` argument can shift window
+- `ewm_mean(span=)` computes exponentially weighted statistics. Higher span value checks more historical data
+- Polars has built-in horizontal functions
+  - `max_horizontal`, `min_horizontal`, `sum_horizontal`
+  - `cum_sum_horizontal()` computes cumulative sum and output is Series with struct type
+  - `concat_list` concatenates horizontal and output as list type
