@@ -307,4 +307,9 @@ Grouping and aggregation
   - `cum_sum_horizontal()` computes cumulative sum and output is Series with struct type
   - `concat_list` concatenates horizontal and output as list type
 - To value counts in lazy mode, there is no LazyFrame so we must call `value_counts` as an expression in a `LazyFrame`
+- Use `group_by()` and `agg()` and computing functions together. Not sorted by default.
+- `group_by()` can accept Polars expression.
+- `group_by(maintain_order=True)` is controlled by input data order
+  - Output order will be the same all the time
+  - It costs computationally.
 - 
