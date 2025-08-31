@@ -306,3 +306,5 @@ Grouping and aggregation
   - `max_horizontal`, `min_horizontal`, `sum_horizontal`
   - `cum_sum_horizontal()` computes cumulative sum and output is Series with struct type
   - `concat_list` concatenates horizontal and output as list type
+- To value counts in lazy mode, there is no LazyFrame so we must call `value_counts` as an expression in a `LazyFrame`
+- 
