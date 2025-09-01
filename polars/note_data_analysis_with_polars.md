@@ -312,4 +312,5 @@ Grouping and aggregation
 - `group_by(maintain_order=True)` is controlled by input data order
   - Output order will be the same all the time
   - It costs computationally.
-- 
+- `group_by()` can iterate by group key and dataframe, and can be followed by aggregation.
+- `group_by()` and `map_groups()` allows for user-defined functions on groups
