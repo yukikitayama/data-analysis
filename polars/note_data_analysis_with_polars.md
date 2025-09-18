@@ -314,3 +314,8 @@ Grouping and aggregation
   - It costs computationally.
 - `group_by()` can iterate by group key and dataframe, and can be followed by aggregation.
 - `group_by()` and `map_groups()` allows for user-defined functions on groups
+- `pivot()` allows to convert long format to wide format
+- `unpivot(index=, on=)` or `unpivot(index=, variable_name=, value_name=)` allows to convert wide format to long format
+  - `melt()` is deprecated.
+- `unstack(step=, how=)` is another way to convert long format to wide format
+  - Compared to `pivot` and `unpivot`, `unstack` is less used.
