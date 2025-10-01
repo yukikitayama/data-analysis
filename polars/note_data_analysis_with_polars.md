@@ -319,3 +319,23 @@ Grouping and aggregation
   - `melt()` is deprecated.
 - `unstack(step=, how=)` is another way to convert long format to wide format
   - Compared to `pivot` and `unpivot`, `unstack` is less used.
+
+Combining dataframes
+- `vstack()` is cheap, no copy, create a new dataframe
+- `rechunk()` combines 2 chunks into a single location in memory
+- `extend()` keeps one of the data in an original location of memory, copy the other data and append it to the original data.
+  - `extend()` happens in-place
+  - Useful when one data is huge, and the other data is small and append
+- `pl.concat()` first do `vstack` for all the data, and then do `rechunk` to combine them to a single location in memory
+  - In practice, only use `concat`, and don't use `vstack` and `rechunk`
+- Handling different dtypes in vertical concatenation
+  - General approach is to convert column types before concatenating by making sure the two schemas are the same
+  - Using **relaxed concatenation** lets Polars handle type checking with `pl.concat([], how="vertical_relaxed")`
+- Horizontal concatenation
+  - `hstack`
+- `.concat(how="diagonal")` can handle the unmatched columns in a vertical concatenation.
+- `join()`
+  - By default, inner join
+  - `join(how="cross")` gives all combinations, no need `on`
+  - `validate="1:1"` can check if the data is one to one match. If not, throws error
+  - You can join in lazy mode but both of the dataframe need to be lazy, then `.collect()`
