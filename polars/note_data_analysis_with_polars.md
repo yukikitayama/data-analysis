@@ -339,3 +339,11 @@ Combining dataframes
   - `join(how="cross")` gives all combinations, no need `on`
   - `validate="1:1"` can check if the data is one to one match. If not, throws error
   - You can join in lazy mode but both of the dataframe need to be lazy, then `.collect()`
+- Join by categorical columns
+  - If there is no global string cache or enum, it's expensive because remapping from string to integer happens
+- To make string cache, write code under `with pl.StringCache():`
+  - Joining by categorical columns doesn't through warning
+- Joining by enum colum is computationally cheaper than categorical column without string cache
+- Categorical columns or enum columns joining is faster than string columns
+- `join(how="semi")` keeps rows with values that are present in another DataFrame
+- `join(how="anti")` keeps rows with values that are not present in another DataFrameg
